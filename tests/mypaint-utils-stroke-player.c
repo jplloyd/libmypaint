@@ -106,9 +106,9 @@ mypaint_utils_stroke_player_set_source_data(MyPaintUtilsStrokePlayer *self, cons
     for (int i=0; i<self->number_of_events; i++) {
         MotionEvent *event = &self->events[i];
 
-        int matches = sscanf(line, "%f %f %f %f %f",
-                             &event->time, &event->x, &event->y, &event->pressure, &event->barrel_rotation);
-        if (matches != 4) {
+        int matches = sscanf(line, "%f %f %f %f %f %f %f",
+                             &event->time, &event->x, &event->y, &event->pressure, event->viewzoom, event->viewrotation, &event->barrel_rotation);
+        if (matches != 7) {
             event->valid = FALSE;
             fprintf(stderr, "Error: Unable to parse line '%s'\n", line);
         } else {

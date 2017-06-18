@@ -8,7 +8,7 @@ void
 stroke_to(MyPaintBrush *brush, MyPaintSurface *surf, float x, float y, float viewzoom, float viewrotation, float barrel_rotation)
 {
     float pressure = 1.0, ytilt = 0.0, xtilt = 0.0, dtime = 1.0/10;
-    mypaint_brush_stroke_to(brush, surf, x, y, pressure, xtilt, ytilt, dtime, viewzoom, viewrotation, float barrel_rotation);
+    mypaint_brush_stroke_to(brush, surf, x, y, pressure, xtilt, ytilt, dtime, viewzoom, viewrotation, barrel_rotation);
 }
 
 int
