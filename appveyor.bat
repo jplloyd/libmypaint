@@ -6,6 +6,9 @@ rem    MSYS2_ARCH:  x86_64 or i686
 rem    MSYSTEM:  MINGW64 or MINGW32
 
 rem Set the paths appropriately
+
+exit 0
+
 PATH C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%
 
 rem Upgrade the MSYS2 platform
