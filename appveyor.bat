@@ -24,7 +24,7 @@ bash -xlc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-gobject-introsp
 echo "Maybe this will shed some light:"
 echo ""
 
-bash -clx "pacman -Ql mingw-w64-%MSYS2_ARCH%-glib2 | grep m4"
+bash -xlc "pacman -Ql mingw-w64-%MSYS2_ARCH%-glib2"
 
 rem Invoke subsequent bash in the build tree
 rem cd %APPVEYOR_BUILD_FOLDER%
