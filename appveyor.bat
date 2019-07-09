@@ -7,8 +7,6 @@ rem    MSYSTEM:  MINGW64 or MINGW32
 
 rem Set the paths appropriately
 
-exit 0
-
 PATH C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%
 
 rem Upgrade the MSYS2 platform
@@ -23,14 +21,19 @@ bash -xlc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-json-c"
 bash -xlc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-glib2"
 bash -xlc "pacman --noconfirm -S --needed mingw-w64-%MSYS2_ARCH%-gobject-introspection"
 
+echo "Maybe this will shed some light:"
+echo ""
+
+bash -clx "pacman -Ql mingw-w64-%MSYS2_ARCH%-glib2 | grep m4"
+
 rem Invoke subsequent bash in the build tree
-cd %APPVEYOR_BUILD_FOLDER%
-set CHERE_INVOKING=yes
+rem cd %APPVEYOR_BUILD_FOLDER%
+rem set CHERE_INVOKING=yes
 
 rem Build/test scripting
-bash -xlc "set pwd"
-bash -xlc "env"
+rem bash -xlc "set pwd"
+rem bash -xlc "env"
 
-bash -xlc "./autogen.sh"
-bash -xlc "./configure"
-bash -xlc "make distcheck"
+rem bash -xlc "./autogen.sh"
+rem bash -xlc "./configure"
+rem bash -xlc "make distcheck"
