@@ -6,4 +6,7 @@ environment:
 build_script:
   - '%APPVEYOR_BUILD_FOLDER%\appveyor.bat'
 
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 deploy: off
