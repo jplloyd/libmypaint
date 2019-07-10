@@ -9,7 +9,8 @@ rem Set the paths appropriately
 
 PATH C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%
 
-bash -lc "./appveyor.sh %MSYS2_ARCH%"
+bash -lc "pwd; ls;"
+bash -l appveyor.sh %MSYS2_ARCH%
 
 exit 0
 
