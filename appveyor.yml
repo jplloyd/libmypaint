@@ -6,6 +6,6 @@ environment:
     #   MSYSTEM: MINGW32
 
 build_script:
-  - '%APPVEYOR_BUILD_FOLDER%\appveyor.bat'
+  - bash '%APPVEYOR_BUILD_FOLDER%\appveyor.sh'
 
 deploy: off
