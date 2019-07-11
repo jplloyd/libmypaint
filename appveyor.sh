@@ -12,7 +12,7 @@ pacman --version || exit 1
 
 # alias pacman='pacman --noconfirm --sync --refresh'
 
-pacman pacman && pacman --sysupgrade || exit 1
+# pacman pacman && pacman --sysupgrade || exit 1
 
 alias pacman='pacman --noconfirm --needed'
 
