@@ -1,15 +1,18 @@
-export PATH=/c/msys64/$MSYSTEM/bin:/c/msys64/usr/bin/:$PATH
+#!/usr/bin/env bash
+
+set -e
 
 echo "-- Current PATH --"
 echo $PATH
 
+whereis pacman
+
 echo "-- pacman version --"
-pacman --version
+pacman --version || exit 1
 
 # alias pacman='pacman --noconfirm --sync --refresh'
 
-# pacman pacman
-# pacman --sysupgrade
+pacman pacman && pacman --sysupgrade || exit 1
 
 alias pacman='pacman --noconfirm --needed'
 
