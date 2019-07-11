@@ -14,14 +14,18 @@ pacman --version || exit 1
 
 # pacman pacman && pacman --sysupgrade || exit 1
 
-alias pacman='pacman --noconfirm --needed'
+alias pmn='pacman --noconfirm --needed'
 
 PKG_PREFIX="mingw-w64-$MSYS2_ARCH"
 
 echo "Prefix: $PKG_PREF"
 
-pacman -S base-devel &&
-pacman -S \
+echo "--- Aliases ---"
+alias
+echo "---------------"
+
+pmn -S base-devel &&
+pmn -S \
        ${PKG_PREFIX}-json-c \
        ${PKG_PREFIX}-glib2 \
        ${PKG_PREFIX}-gobject-introspection &&
