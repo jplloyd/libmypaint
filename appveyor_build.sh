@@ -6,17 +6,17 @@ set -e
 PKG_PREFIX="mingw-w64-$MSYS2_ARCH"
 
 # Install dependencies
-echo "Prefix: $PKG_PREF"
+echo "Prefix: $PKG_PREFIX"
 pacman --noconfirm -S --needed \
        base-devel \
-       ${PKG_PREFIX}-json-c \
-       ${PKG_PREFIX}-glib2 \
-       ${PKG_PREFIX}-gobject-introspection
+       "${PKG_PREFIX}-json-c" \
+       "${PKG_PREFIX}-glib2" \
+       "${PKG_PREFIX}-gobject-introspection"
 
 
 # Add m4 directories to the ACLOCAL_PATH
 # Remove this if/when the underlying reason for their omission is found
-for p in $(pacman --noconfirm -Ql ${PKG_PREFIX}-glib2 | # List files
+for p in $(pacman --noconfirm -Ql "${PKG_PREFIX}-glib2" | # List files
 		  grep "\.m4" | # We only care about the macro files
 		  xargs readlink -e | # Make canonical, just in case
 		  xargs dirname | # Strip file names from paths
@@ -28,7 +28,10 @@ do
 done
 
 export ACLOCAL_PATH
-export PWD="$APPVEYOR_BULD_FOLDER"
+export PWD="$APPVEYOR_BUILD_FOLDER"
+
+echo "Checking gcc version"
+whereis gcc
 
 ./autogen.sh
 ./configure
