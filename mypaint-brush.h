@@ -18,7 +18,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <mypaint-config.h>
+#include "mypaint-config.h"
 #include <mypaint-surface.h>
 #include <mypaint-brush-settings.h>
 

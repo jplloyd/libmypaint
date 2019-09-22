@@ -1,7 +1,7 @@
 #ifndef MAPPING_H
 #define MAPPING_H
 
-#include <mypaint-config.h>
+#include "mypaint-config.h"
 #include <mypaint-glib-compat.h>
 
 G_BEGIN_DECLS

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <mypaint-surface.h>
-#include <mypaint-config.h>
+#include "mypaint-config.h"
 
 typedef enum {
     MYPAINT_SYMMETRY_TYPE_VERTICAL,
