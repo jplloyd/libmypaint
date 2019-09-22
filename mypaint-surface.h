@@ -19,7 +19,7 @@
  */
 
 #include "mypaint-config.h"
-#include <mypaint-rectangle.h>
+#include "mypaint-rectangle.h"
 
 G_BEGIN_DECLS
 

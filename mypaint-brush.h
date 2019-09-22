@@ -19,8 +19,8 @@
  */
 
 #include "mypaint-config.h"
-#include <mypaint-surface.h>
-#include <mypaint-brush-settings.h>
+#include "mypaint-surface.h"
+#include "mypaint-brush-settings.h"
 
 G_BEGIN_DECLS
 
