@@ -60,7 +60,6 @@ enum {
   PREV_COL_RECENTNESS
 };
 
-
 /* The Brush class stores two things:
    b) settings: constant during a stroke (eg. size, spacing, dynamics, color selected by the user)
    a) states: modified during a stroke (eg. speed, smudge colors, time/distance to next dab, position filter states)

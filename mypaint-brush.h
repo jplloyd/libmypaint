@@ -21,6 +21,7 @@
 #include "mypaint-config.h"
 #include "mypaint-surface.h"
 #include "mypaint-brush-settings.h"
+#include "mypaint-stroke-params.h"
 
 G_BEGIN_DECLS
 
@@ -41,8 +42,7 @@ void
 mypaint_brush_new_stroke(MyPaintBrush *self);
 
 int
-mypaint_brush_stroke_to(MyPaintBrush *self, MyPaintSurface *surface, float x, float y,
-                        float pressure, float xtilt, float ytilt, double dtime, float viewzoom, float viewrotation, float barrel_rotation);
+mypaint_brush_stroke_to(MyPaintBrush *self, MyPaintSurface *surface, float x, float y, double dtime, MyPaintDabParams* params);
 
 void
 mypaint_brush_set_base_value(MyPaintBrush *self, MyPaintBrushSetting id, float value);

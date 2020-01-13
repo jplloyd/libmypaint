@@ -103,9 +103,12 @@ nobase_libmypaint_public_HEADERS = \
 	mypaint-mapping.h				\
 	mypaint-matrix.h	\
 	mypaint-symmetry.h	\
+	mypaint-stroke-params.h	\
 	$(MyPaint_introspectable_headers)
 
 LIBMYPAINT_SOURCES = \
+	mypaint-stroke-params.c	\
+	mypaint-stroke-enums.c	\
 	brushmodes.c					\
 	config.h						\
 	fifo.c							\
