@@ -19,6 +19,10 @@
 
 #include <stddef.h>
 
+#include "mypaint-glib-compat.h"
+
+G_BEGIN_DECLS
+
 typedef struct MyPaintStrokeParams MyPaintStrokeParams;
 
 /* Allocation, Initialization, Deallocation */
@@ -36,6 +40,9 @@ void
 mypaint_stroke_params_free(MyPaintStrokeParams *);
 
 /* --------------------------------------- */
+
+void mypaint_stroke_params_set_v1(
+    MyPaintStrokeParams* params, float xtilt, float ytilt, float viewzoom, float viewrotation, float barrelrotation);
 
 /* Direct getters/setters */
 
@@ -103,5 +110,7 @@ mypaint_stroke_params_index_viewrotation();
 
 int
 mypaint_stroke_params_index_barrelrotation();
+
+G_END_DECLS
 
 #endif

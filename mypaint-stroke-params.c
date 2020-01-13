@@ -50,6 +50,15 @@ mypaint_stroke_params_init(MyPaintStrokeParams* params)
     params->float_params[STROKE_PARAM_BARRELROTATION] = 0.0;
 }
 
+
+void mypaint_stroke_params_set_v1(MyPaintStrokeParams* params, float xtilt, float ytilt, float viewzoom, float viewrotation, float barrelrotation) {
+    params->float_params[STROKE_PARAM_XTILT] = xtilt;
+    params->float_params[STROKE_PARAM_YTILT] = ytilt;
+    params->float_params[STROKE_PARAM_VIEWZOOM] = viewzoom;
+    params->float_params[STROKE_PARAM_VIEWROTATION] = viewrotation;
+    params->float_params[STROKE_PARAM_BARRELROTATION] = barrelrotation;
+}
+
 /* Setters/Getters */
 
 void
