@@ -50,6 +50,7 @@ struct MyPaintUtilsStrokePlayer {
     MyPaintSurface *surface;
     MyPaintBrush *brush;
     MotionEvent *events;
+    MyPaintStrokeParams *stroke_params;
     int current_event_index;
     int number_of_events;
     gboolean transaction_on_stroke; /* If MyPaintBrush::stroke_to should be done between MyPaintSurface::begin_atomic() end_atomic() calls.*/
@@ -64,6 +65,8 @@ mypaint_utils_stroke_player_new(void)
     self->surface = NULL;
     self->brush = NULL;
     self->events = NULL;
+    self->stroke_params = mypaint_stroke_params_new();
+    mypaint_stroke_params_init(self->stroke_params);
     self->number_of_events = 0;
     self->current_event_index = 0;
     self->transaction_on_stroke = TRUE;
@@ -78,6 +81,7 @@ mypaint_utils_stroke_player_free(MyPaintUtilsStrokePlayer *self)
     if (self->events) {
         free(self->events);
     }
+    mypaint_stroke_params_free(self->stroke_params);
     free(self);
 }
 
@@ -144,11 +148,12 @@ mypaint_utils_stroke_player_iterate(MyPaintUtilsStrokePlayer *self)
         if (self->transaction_on_stroke) {
             mypaint_surface_begin_atomic(self->surface);
         }
-
+        // Amend with mypaint_stroke_params_xyz_set(self->stroke_params, value),
+        // if the recorded input is amended with an event of type xyz (for xyz = xtilt, ytilt, viewzoom, etc)
         mypaint_brush_stroke_to(self->brush, self->surface,
                                 event->x*self->scale, event->y*self->scale,
-                                event->pressure,
-                                event->xtilt, event->ytilt, dtime, event->viewzoom, event->viewrotation, event->barrel_rotation);
+                                event->pressure, dtime,
+                                self->stroke_params);
 
         if (self->transaction_on_stroke) {
             mypaint_surface_end_atomic(self->surface, NULL);

@@ -33,6 +33,8 @@
 #include "brushmodes.h"
 #include "operationqueue.h"
 
+#include "mypaint-dab-enum.c"
+
 void process_tile(MyPaintTiledSurface *self, int tx, int ty);
 
 static void
@@ -684,17 +686,22 @@ gboolean draw_dab_internal (MyPaintTiledSurface *self, float x, float y,
 // returns TRUE if the surface was modified
 int draw_dab (MyPaintSurface *surface, float x, float y,
                float radius,
-               float color_r, float color_g, float color_b,
-               float opaque, float hardness,
-               float color_a,
-               float aspect_ratio, float angle,
-               float lock_alpha,
-               float colorize,
-               float posterize,
-               float posterize_num,
-               float paint)
+               float color_r, float color_g, float color_b, const MyPaintDabParams* params)
 {
     MyPaintTiledSurface* self = (MyPaintTiledSurface*)surface;
+
+    float * real_params = (float*) params;
+
+    const float opaque = real_params[DAB_PARAM_OPAQUE];
+    const float hardness = real_params[DAB_PARAM_HARDNESS];
+    const float color_a = real_params[DAB_PARAM_ALPHA_ERASER];
+    const float aspect_ratio = real_params[DAB_PARAM_ASPECT_RATIO];
+    const float angle = real_params[DAB_PARAM_ANGLE];
+    const float lock_alpha = real_params[DAB_PARAM_LOCK_ALPHA];
+    const float colorize = real_params[DAB_PARAM_COLORIZE];
+    const float posterize = real_params[DAB_PARAM_POSTERIZE];
+    const float posterize_num = real_params[DAB_PARAM_POSTERIZE_NUM];
+    const float paint = real_params[DAB_PARAM_OPAQUE];
 
     // These calls are repeated enough to warrant a local macro, for both readability and correctness.
 #define DDI(x, y, angle, bb_idx) (draw_dab_internal(\

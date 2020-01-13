@@ -107,8 +107,8 @@ nobase_libmypaint_public_HEADERS = \
 	$(MyPaint_introspectable_headers)
 
 LIBMYPAINT_SOURCES = \
+	mypaint-dab-params.c	\
 	mypaint-stroke-params.c	\
-	mypaint-stroke-enums.c	\
 	brushmodes.c					\
 	config.h						\
 	fifo.c							\
