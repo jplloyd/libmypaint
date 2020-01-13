@@ -104,6 +104,7 @@ nobase_libmypaint_public_HEADERS = \
 	mypaint-matrix.h	\
 	mypaint-symmetry.h	\
 	mypaint-stroke-params.h	\
+	mypaint-dab-params.h	\
 	$(MyPaint_introspectable_headers)
 
 LIBMYPAINT_SOURCES = \
