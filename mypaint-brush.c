@@ -28,9 +28,12 @@
 #endif
 
 #include "mypaint-brush.h"
-
 #include "mypaint-brush-settings.h"
 #include "mypaint-mapping.h"
+
+#include "mypaint-dab-enum.c"
+#include "mypaint-stroke-enum.c"
+
 #include "helpers.h"
 #include "rng-double.h"
 
@@ -1077,9 +1080,20 @@ void print_inputs(MyPaintBrush *self, float* inputs)
     const float posterize = self->settings_value[MYPAINT_BRUSH_SETTING_POSTERIZE];
     const float posterize_num = self->settings_value[MYPAINT_BRUSH_SETTING_POSTERIZE_NUM];
 
-    return mypaint_surface_draw_dab (
-        surface, x, y, radius, color_h, color_s, color_v, opaque, hardness, eraser_target_alpha,
-        dab_ratio, dab_angle, lock_alpha, colorize, posterize, posterize_num, paint_factor);
+    // Be mindful to change this if the internal implementation changes
+    float params[DAB_NUM_PARAMS];
+    params[DAB_PARAM_OPAQUE] = opaque;
+    params[DAB_PARAM_HARDNESS] = hardness;
+    params[DAB_PARAM_ALPHA_ERASER] = eraser_target_alpha;
+    params[DAB_PARAM_ASPECT_RATIO] = dab_ratio;
+    params[DAB_PARAM_ANGLE] = dab_angle;
+    params[DAB_PARAM_LOCK_ALPHA] = lock_alpha;
+    params[DAB_PARAM_COLORIZE] = colorize;
+    params[DAB_PARAM_POSTERIZE] = posterize;
+    params[DAB_PARAM_POSTERIZE_NUM] = posterize_num;
+    params[DAB_PARAM_PIGMENT_FACTOR] = paint_factor;
+
+    return mypaint_surface_draw_dab (surface, x, y, radius, color_h, color_s, color_v, (MyPaintDabParams*)&params);
   }
 
   // How many dabs will be drawn between the current and the next (x, y, pressure, +dt) position?
@@ -1139,12 +1153,18 @@ void print_inputs(MyPaintBrush *self, float* inputs)
    * Returns: non-0 if the stroke is finished or empty, else 0.
    */
   int mypaint_brush_stroke_to (MyPaintBrush *self, MyPaintSurface *surface,
-                                float x, float y, float pressure,
-                                float xtilt, float ytilt, double dtime, float viewzoom, float viewrotation, float barrel_rotation)
+                               float x, float y, float pressure, double dtime, const MyPaintStrokeParams* params)
   {
     const float max_dtime = 5;
 
-    //printf("%f %f %f %f\n", (double)dtime, (double)x, (double)y, (double)pressure);
+    // Reliance on internal implementation - we can use it, external implementations cannot!
+    float* real_params =  (float*) params;
+
+    float xtilt = real_params[STROKE_PARAM_XTILT];
+    float ytilt = real_params[STROKE_PARAM_YTILT];
+    float viewzoom = real_params[STROKE_PARAM_VIEWZOOM];
+    float viewrotation = real_params[STROKE_PARAM_VIEWROTATION];
+    float barrel_rotation = real_params[STROKE_PARAM_BARRELROTATION];
 
     float tilt_ascension = 0.0;
     float tilt_declination = 90.0;
@@ -1196,7 +1216,7 @@ void print_inputs(MyPaintBrush *self, float* inputs)
     if (dtime > 0.100 && pressure && self->states[MYPAINT_BRUSH_STATE_PRESSURE] == 0) {
       // Workaround for tablets that don't report motion events without pressure.
       // This is to avoid linear interpolation of the pressure between two events.
-      mypaint_brush_stroke_to (self, surface, x, y, 0.0, 90.0, 0.0, dtime-0.0001, viewzoom, viewrotation, 0.0);
+      mypaint_brush_stroke_to (self, surface, x, y, 0.0, dtime-0.0001, params);
       dtime = 0.0001;
     }
 

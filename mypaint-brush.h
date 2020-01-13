@@ -42,7 +42,7 @@ void
 mypaint_brush_new_stroke(MyPaintBrush *self);
 
 int
-mypaint_brush_stroke_to(MyPaintBrush *self, MyPaintSurface *surface, float x, float y, double dtime, MyPaintDabParams* params);
+mypaint_brush_stroke_to(MyPaintBrush *self, MyPaintSurface *surface, float x, float y, float pressure, double dtime, const MyPaintStrokeParams* params);
 
 void
 mypaint_brush_set_base_value(MyPaintBrush *self, MyPaintBrushSetting id, float value);

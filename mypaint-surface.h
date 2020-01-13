@@ -4,6 +4,7 @@
 /* libmypaint - The MyPaint Brush Library
  * Copyright (C) 2008 Martin Renold <martinxyz@gmx.ch>
  * Copyright (C) 2012 Jon Nordby <jononor@gmail.com>
+ * Copyright (C) 2019 The MyPaint Team
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,30 +21,21 @@
 
 #include "mypaint-config.h"
 #include "mypaint-rectangle.h"
+#include "mypaint-dab-params.h"
 
 G_BEGIN_DECLS
 
 typedef struct MyPaintSurface MyPaintSurface;
 
-typedef void (*MyPaintSurfaceGetColorFunction) (MyPaintSurface *self,
-                                                float x, float y,
-                                                float radius,
-                                                float * color_r, float * color_g, float * color_b, float * color_a,
-                                                float paint
-                                                );
+typedef void (*MyPaintSurfaceGetColorFunction)(
+    MyPaintSurface* self, float x, float y, float radius, float* color_r, float* color_g, float* color_b,
+    float* color_a, float paint);
 
-typedef int (*MyPaintSurfaceDrawDabFunction) (MyPaintSurface *self,
-                       float x, float y,
-                       float radius,
-                       float color_r, float color_g, float color_b,
-                       float opaque, float hardness,
-                       float alpha_eraser,
-                       float aspect_ratio, float angle,
-                       float lock_alpha,
-                       float colorize,
-                       float posterize,
-                       float posterize_num,
-                       float paint);
+typedef int (*MyPaintSurfaceBasicDrawDabFunction)(
+    MyPaintSurface* self, float x, float y, float radius, float color_r, float color_g, float color_b, float opaque,
+    float hardness, float alpha_eraser, float aspect_ratio, float angle, float lock_alpha, float colorize);
+
+typedef int (*MyPaintSurfaceDrawDabFunction)(MyPaintSurface* self, float x, float y, float radius, float color_r, float color_g, float color_b, const MyPaintDabParams*);
 
 typedef void (*MyPaintSurfaceDestroyFunction) (MyPaintSurface *self);
 
@@ -59,14 +51,19 @@ typedef void (*MyPaintSurfaceEndAtomicFunction) (MyPaintSurface *self, MyPaintRe
   * Abstract surface type for the MyPaint brush engine. The surface interface
   * lets the brush engine specify dabs to render, and to pick color.
   */
-struct MyPaintSurface {
+struct MyPaintSurface{
+    int refcount;
     MyPaintSurfaceDrawDabFunction draw_dab;
     MyPaintSurfaceGetColorFunction get_color;
     MyPaintSurfaceBeginAtomicFunction begin_atomic;
     MyPaintSurfaceEndAtomicFunction end_atomic;
     MyPaintSurfaceDestroyFunction destroy;
     MyPaintSurfaceSavePngFunction save_png;
-    int refcount;
+    /* Space reserved for future use, do not use in implementations */
+    void (*mypaint_reserved_space1)(void);
+    void (*mypaint_reserved_space2)(void);
+    void (*mypaint_reserved_space3)(void);
+    void (*mypaint_reserved_space4)(void);
 };
 
 /**
@@ -74,44 +71,24 @@ struct MyPaintSurface {
   *
   * Draw a dab onto the surface.
   */
-int
-mypaint_surface_draw_dab(MyPaintSurface *self,
-                       float x, float y,
-                       float radius,
-                       float color_r, float color_g, float color_b,
-                       float opaque, float hardness,
-                       float alpha_eraser,
-                       float aspect_ratio, float angle,
-                       float lock_alpha,
-                       float colorize,
-                       float posterize,
-                       float posterize_num,
-                       float paint
-                       );
+int mypaint_surface_draw_dab(
+    MyPaintSurface* self, float x, float y, float radius, float color_r, float color_g, float color_b,
+    const MyPaintDabParams*);
 
+void mypaint_surface_get_color(
+    MyPaintSurface* self, float x, float y, float radius, float* color_r, float* color_g, float* color_b,
+    float* color_a, float paint);
 
-void
-mypaint_surface_get_color(MyPaintSurface *self,
-                        float x, float y,
-                        float radius,
-                        float * color_r, float * color_g, float * color_b, float * color_a,
-                        float paint
-                        );
-                        
+float mypaint_surface_get_alpha(MyPaintSurface* self, float x, float y, float radius);
 
-float
-mypaint_surface_get_alpha (MyPaintSurface *self, float x, float y, float radius);
+void mypaint_surface_save_png(MyPaintSurface* self, const char* path, int x, int y, int width, int height);
 
-void
-mypaint_surface_save_png(MyPaintSurface *self, const char *path, int x, int y, int width, int height);
+void mypaint_surface_begin_atomic(MyPaintSurface* self);
+void mypaint_surface_end_atomic(MyPaintSurface* self, MyPaintRectangles* roi);
 
-void mypaint_surface_begin_atomic(MyPaintSurface *self);
-
-void mypaint_surface_end_atomic(MyPaintSurface *self, MyPaintRectangles *roi);
-
-void mypaint_surface_init(MyPaintSurface *self);
-void mypaint_surface_ref(MyPaintSurface *self);
-void mypaint_surface_unref(MyPaintSurface *self);
+void mypaint_surface_init(MyPaintSurface* self);
+void mypaint_surface_ref(MyPaintSurface* self);
+void mypaint_surface_unref(MyPaintSurface* self);
 
 G_END_DECLS
 

@@ -43,7 +43,6 @@ mypaint_stroke_params_free(MyPaintStrokeParams* params)
 void
 mypaint_stroke_params_init(MyPaintStrokeParams* params)
 {
-    params->float_params[STROKE_PARAM_PRESSURE] = 0.0;
     params->float_params[STROKE_PARAM_XTILT] = 0.0;
     params->float_params[STROKE_PARAM_YTILT] = 0.0;
     params->float_params[STROKE_PARAM_VIEWZOOM] = 1.0;
@@ -52,18 +51,6 @@ mypaint_stroke_params_init(MyPaintStrokeParams* params)
 }
 
 /* Setters/Getters */
-
-void
-mypaint_stroke_params_pressure_set(MyPaintStrokeParams* params, float pressure)
-{
-    params->float_params[STROKE_PARAM_PRESSURE] = pressure;
-}
-
-float
-mypaint_stroke_params_pressure_get(const MyPaintStrokeParams* params)
-{
-    return params->float_params[STROKE_PARAM_PRESSURE];
-}
 
 void
 mypaint_stroke_params_xtilt_set(MyPaintStrokeParams* params, float xtilt)
@@ -104,13 +91,13 @@ mypaint_stroke_params_viewzoom_get(const MyPaintStrokeParams* params)
 void
 mypaint_stroke_params_viewrotation_set(MyPaintStrokeParams* params, float viewrotation)
 {
-    params->float_params[STROKE_PARAM_PRESSURE] = viewrotation;
+    params->float_params[STROKE_PARAM_VIEWROTATION] = viewrotation;
 }
 
 float
 mypaint_stroke_params_viewrotation_get(const MyPaintStrokeParams* params)
 {
-    return params->float_params[STROKE_PARAM_PRESSURE];
+    return params->float_params[STROKE_PARAM_VIEWROTATION];
 }
 
 void
@@ -134,16 +121,10 @@ mypaint_stroke_params_floats(MyPaintStrokeParams * params) {
 
 int
 mypaint_stroke_params_num_floats() {
-  return NUM_PARAMS;
+  return STROKE_NUM_PARAMS;
 }
 
 /* Index functions */
-
-int
-mypaint_stroke_params_index_pressure()
-{
-    return STROKE_PARAM_PRESSURE;
-}
 
 int
 mypaint_stroke_params_index_xtilt()

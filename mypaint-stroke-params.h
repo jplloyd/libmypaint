@@ -21,7 +21,7 @@
 
 typedef struct MyPaintStrokeParams MyPaintStrokeParams;
 
-/* Allocation, Initialization, Freeing */
+/* Allocation, Initialization, Deallocation */
 
 size_t
 mypaint_stroke_params_get_size();
@@ -38,12 +38,6 @@ mypaint_stroke_params_free(MyPaintStrokeParams *);
 /* --------------------------------------- */
 
 /* Direct getters/setters */
-
-void
-mypaint_stroke_params_pressure_set(MyPaintStrokeParams*, float pressure);
-
-float
-mypaint_stroke_params_pressure_get(const MyPaintStrokeParams*);
 
 void
 mypaint_stroke_params_xtilt_set(MyPaintStrokeParams*, float xtilt);
@@ -95,9 +89,6 @@ mypaint_stroke_params_num_floats();
  * for local caching and use with the floats accessor
  *
  */
-int
-mypaint_stroke_params_index_pressure();
-
 int
 mypaint_stroke_params_index_xtilt();
 
