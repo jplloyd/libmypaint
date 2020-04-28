@@ -1,0 +1,27 @@
+var mypaint_surface_8h =
+[
+    [ "MyPaintSurface", "structMyPaintSurface.html", "structMyPaintSurface" ],
+    [ "MyPaintSurface2", "structMyPaintSurface2.html", "structMyPaintSurface2" ],
+    [ "MyPaintSurfaceBeginAtomicFunction", "mypaint-surface_8h.html#aec568a24a8126b9b5a16e217e1557881", null ],
+    [ "MyPaintSurfaceDestroyFunction", "mypaint-surface_8h.html#af1da97810d35d5cb57b75525e309c529", null ],
+    [ "MyPaintSurfaceDrawDabFunction", "mypaint-surface_8h.html#ae8a8fa3debaf0e44faadac54e2ea949b", null ],
+    [ "MyPaintSurfaceDrawDabFunction2", "mypaint-surface_8h.html#a855bc800b076b9a14cb3d811a8603677", null ],
+    [ "MyPaintSurfaceEndAtomicFunction", "mypaint-surface_8h.html#ace3ff86430dfe8a34fe78e6736a0b73f", null ],
+    [ "MyPaintSurfaceEndAtomicFunction2", "mypaint-surface_8h.html#ab0c93676bd1c7651cece04617e3b4021", null ],
+    [ "MyPaintSurfaceGetColorFunction", "mypaint-surface_8h.html#a0a37f73b1150224ae0cadbf1da9c8899", null ],
+    [ "MyPaintSurfaceGetColorFunction2", "mypaint-surface_8h.html#afe1c0be81f04dc4f4038632df03b3101", null ],
+    [ "MyPaintSurfaceSavePngFunction", "mypaint-surface_8h.html#ab65a4c572dca2152be84ea0efd128e0d", null ],
+    [ "mypaint_surface2_draw_dab", "mypaint-surface_8h.html#ad26b75e15a87ebf594a63d3184919db8", null ],
+    [ "mypaint_surface2_end_atomic", "mypaint-surface_8h.html#a8c9f2a40ef42f6f6c6c84f10b052b8c8", null ],
+    [ "mypaint_surface2_get_color", "mypaint-surface_8h.html#aabeca8c74935c0c6961f7601548ca10c", null ],
+    [ "mypaint_surface2_to_surface", "mypaint-surface_8h.html#ac946a14665494dd0129fec608e9543c2", null ],
+    [ "mypaint_surface_begin_atomic", "mypaint-surface_8h.html#a9f77f9b5cc458d69a21d368af6599c3f", null ],
+    [ "mypaint_surface_draw_dab", "mypaint-surface_8h.html#a609dfb78c9129a368be24b9fbf5f3adc", null ],
+    [ "mypaint_surface_end_atomic", "mypaint-surface_8h.html#a2b21847d199e0d391755d8a839737959", null ],
+    [ "mypaint_surface_get_alpha", "mypaint-surface_8h.html#a09888e36c90668065174bee6ee46423a", null ],
+    [ "mypaint_surface_get_color", "mypaint-surface_8h.html#a73aeec7e9d35ae5790a8cb450aaf2df4", null ],
+    [ "mypaint_surface_init", "mypaint-surface_8h.html#ac835552c7b850564c3dc18ae5d89b8e1", null ],
+    [ "mypaint_surface_ref", "mypaint-surface_8h.html#a4d0ac220de2a2b6faa7dc3040619a99c", null ],
+    [ "mypaint_surface_save_png", "mypaint-surface_8h.html#a8c2e4039464f0ee7d9cf1bd5010765a5", null ],
+    [ "mypaint_surface_unref", "mypaint-surface_8h.html#a2b00c8b3071ef6fbd17e95b71c4c695a", null ]
+];
